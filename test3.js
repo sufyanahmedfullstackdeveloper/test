@@ -13,8 +13,10 @@ const data = [
   { session_name: null, classes: [{ class_name: 'second class', students: [{ student_name: 'adi' }] }] },
 ];
 
+
+
 function result(data) {
-  // Your Code Here
+return JSON.parse(JSON.stringify(data,(key,value)=> value==undefined ||value=== null ? undefined :value))
 }
 
 console.log(result(data));
