@@ -13,7 +13,7 @@
  *        name: 'A',
  *        students: [
  *          { student_id: 1, name: 'Adi' },
- *          { student_id: 1, name: 'Budi' },
+ *          sssx{ student_id: 1, name: 'Budi' },
  *        ],
  *      },
  *      {
@@ -62,8 +62,43 @@ const sessions = [
   { session_id: 2, time: '10:00', student: { student_id: 3, name: 'Maha' }, class: { class_id: 3, name: 'C' } },
 ];
 
-function result(sessions) {
-  // Your Code Here
+function result(sessions)
+ {
+let formattedSessions=[]
+for(const s of sessions)
+{
+    let sessionObj=formattedSessions.find(sess=>sess.session_id=s.session_id)
+    
+    if(!sessionObj)
+    {
+        sessionObj={ session_id: s.session_id,
+     time: s.time,
+     classes: []}
+     formattedSessions.push(sessionObj)
+       
+    }
+    
+let  classObj=sessionObj.classes.find(c=>c.class_id=s.class.class_id)
+
+if(!classObj)
+ {
+    classObj=
+    { class_id: s.class.class_id,
+    name: s.class.name,
+   students:[]
+       
+    }
+     sessionObj.classes.push(classObj) 
+     
+     if(!classObj.students.some(stu=>stu.student_id==s.student.student_id))
+     {
+         classObj.students.push({student_id:s.student.student_id,name:s.student.name})
+     }
+
 }
 
+return formattedSessions;
+}
+}
 console.log(result(sessions));
+
